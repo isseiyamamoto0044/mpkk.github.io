@@ -1,0 +1,390 @@
+/* ===== ReceptionOpsDashboard.css ===== */
+
+/* ベース（Tailwind未設定でも最低限の見た目を担保） */
+:root {
+  --bg: #f7f7f8;
+  --fg: #111827;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+}
+
+.ops-root,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* 2カラム全体：幅が狭い時は1カラム、広い時は2カラム */
+.ops-two-col {
+  /* 既存のTailwindが無くても2カラムになるようフォールバック */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 1024px) {
+  .ops-two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 左カラムの下段2分割（出勤メンバー／今日の予定） */
+.ops-left-bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .ops-left-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 右カラムの縦2分割（引き継ぎ／今日のタスク） */
+.ops-right-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .ops-right-split {
+    grid-template-columns: 1fr 1fr; /* 横2分割 */
+  }
+}
+
+/* Card の最低限の見た目（Tailwindなしでも枠が出る） */
+.ops-card,
+.ops-card .card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+
+/* スクロール領域があるカードの中身を見切れないように */
+.ops-scroll {
+  max-height: 16rem; /* 64 * 0.25rem と同等 */
+  overflow: auto;
+}
+
+/* 予定の時間とタイトルの並びを整える */
+.ops-event {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 細かな余白のフォールバック（Tailwindなしでも崩れないように） */
+.ops-p-24 { padding: 24px; }
+.ops-gap-8 { gap: 8px; }
+.ops-gap-12 { gap: 12px; }
+.ops-mt-12 { margin-top: 12px; }
+.ops-mt-16 { margin-top: 16px; }
+
+/* === MonthCalendar table style === */
+.calendar { width: 100%; }
+.calendar-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.calendar-title { font-weight: 600; font-size: 14px; }
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* 各列を均等幅に */
+  font-size: 13px;
+}
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid var(--border, #e5e7eb);
+  text-align: center;
+  vertical-align: middle;
+  height: 44px; /* 行の高さ（好みで調整） */
+  padding: 0;
+}
+
+/* 曜日カラー（任意） */
+.calendar-table th.dow-0,
+.calendar-table td.dow-0 { color: #d9463f; } /* 日: 赤系 */
+.calendar-table th.dow-6,
+.calendar-table td.dow-6 { color: #2563eb; } /* 土: 青系 */
+
+/* 日付セルのボタン */
+.calendar-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; height: 100%;
+  background: transparent; border: 0;
+  font: inherit; color: inherit;
+  cursor: pointer;
+}
+.calendar-table td.is-empty { background: #fafafa; }
+
+.calendar-table td.is-today .calendar-cell {
+  outline: 2px solid #6366f1; /* 今日の枠 */
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+.calendar-table td.is-selected .calendar-cell {
+  background: #4f46e5;  /* indigo-600 */
+  color: #fff;
+  border-radius: 6px;
+}
+.calendar-table td.is-date .calendar-cell:hover {
+  background: #f3f4f6;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------
+ * Member（ダッシュボード左のカード中リスト）
+ * ------------------------------------------------ */
+.member-row {
+  display: grid;
+  grid-template-columns: 1fr auto; /* 左：情報 / 右：ボタン */
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--ops-border);
+  border-radius: 12px;
+  background: var(--ops-card-bg);
+}
+
+.member-row__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;             /* 名前 / タグ / 出勤時間の間隔 */
+  min-width: 0;
+}
+
+.member-name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.member-time {
+  font-size: 12px;
+  color: var(--ops-muted);
+  white-space: nowrap;
+}
+
+.member-row__right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ===== 共有事項の行表示（共通） ===== */
+
+.handover-row { }
+
+.handover-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;           /* 各要素の間隔 */
+  min-height: 40px;
+}
+.handover-text {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.handover-period {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+.handover-spacer { flex: 1; }
+
+.handover-notes {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+/* ========== Handovers 行（元の雰囲気に） ========== */
+
+.handover-row {
+  padding: 12px 14px;
+}
+
+.handover-item {
+  display: grid;
+  grid-template-columns: 28px 1fr; /* 左：PIN / 右：内容 */
+  column-gap: 12px;
+  align-items: start;
+}
+
+.pin-btn {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #e5e7eb;      /* gray-200 */
+  border-radius: 9999px;
+  background: #fff;
+  transition: background .15s, border-color .15s, box-shadow .15s;
+}
+.pin-btn:hover { background: #f9fafb; border-color: #d1d5db; }
+.pin-btn.is-pinned { background: #fffbeb; border-color: #f59e0b; } /* amber */
+
+.handover-content { min-width: 0; }
+
+.handover-main {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto; 
+  /* 本文 | タグ | 期間 | 余白 | 削除 */
+  align-items: center;
+  column-gap: 12px;
+}
+
+.handover-text {
+  font-size: .95rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.handover-period { 
+  font-size: .8rem; 
+  color: #6b7280; /* gray-500 */
+  white-space: nowrap;
+}
+
+.handover-main .spacer { width: 100%; }
+
+.handover-notes {
+  margin-top: 6px;
+  font-size: .85rem;
+  color: #111827;             /* gray-900 */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 6px;
+}
+.handover-notes .label { color: #6b7280; } /* gray-500 */
+
+/* ===== Handover rows ===== */
+.handover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.handover-row.is-pinned {
+  border-color: #f59e0b33;  /* ソフトなアクセント */
+  box-shadow: 0 2px 6px rgba(245, 158, 11, .12);
+}
+
+.handover-main {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto; /* 📍 | タイトル | タグ | 期間 */
+  align-items: center;
+  gap: 12px;
+}
+
+.pin-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.handover-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.handover-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.handover-period {
+  font-size: 0.82rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.handover-actions {
+  margin-left: auto;
+  margin-top: 8px; /* 狭い幅でも崩れにくく */
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+@media (min-width: 680px) {
+  .handover-row {
+    padding: 12px 16px;
+  }
+  .handover-actions {
+    margin-top: 0;
+    grid-column: 1 / -1;
+  }
+}
+
+.handover-note {
+  margin-left: 30px; /* 📍分の字下げ */
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: #6b7280;
+  white-space: pre-wrap;
+}
+
+/* ==== Dashboard: Handovers 見た目統一 ==== */
+.ops-handover-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 12px; }
+
+.handover-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.handover-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.handover-pin { width: 18px; height: 18px; flex: 0 0 auto; }
+.handover-title { font-weight: 600; white-space: nowrap; }
+
+.handover-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  white-space: nowrap; /* 1行保持 */
+}
+
+.handover-period { color: #6b7280; }
+
+.handover-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto; /* 右寄せ */
+}
+
+.handover-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  padding-left: 30px; /* ピン＋タイトルの分だけ下げる */
+}
+
+/* 将来のためのフック（チェックリスト全体） */
+.checklist-card { /* ここは空でOK。後で自由に上書きして使えるように残しておきます */ }

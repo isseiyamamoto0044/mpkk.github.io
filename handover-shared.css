@@ -1,0 +1,82 @@
+/* ===== 共通行レイアウト ===== */
+.handover-row{
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  display: block;
+}
+.handover-row + .handover-row{ margin-top: 10px; }
+
+/* 1行目：左(ピン+題名)、中(タグ+期間)、右(操作) を同一行に */
+.handover-row > .line1{
+  display: flex;
+  align-items: center;
+}
+
+/* コンポーネント内で直接 .handover-left / middle / actions を使っているので
+   ここは .handover-row 直下の要素として扱う */
+.handover-left{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.handover-pin{ display: inline-flex; opacity: .9; }
+.handover-title{ font-size: 14px; font-weight: 600; color:#111827; }
+
+.handover-middle{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+.handover-period{ font-size: 12px; color:#6b7280; }
+
+.handover-actions{
+  margin-left: auto;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.opbtn{
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:12px;
+}
+.opbtn:hover{ background:#f3f4f6; }
+.opbtn-danger{ color:#fff; background:#ef4444; border-color:#ef4444; }
+.opbtn-danger:hover{ background:#dc2626; }
+
+/* 補足 */
+.handover-note{
+  margin-top: 8px;
+  font-size: 12px;
+  color:#374151;
+}
+.note-label{ color:#6b7280; margin-right: 4px; }
+
+/* ===== モーダル ===== */
+.modal-backdrop{
+  position: fixed; inset:0; background: rgba(0,0,0,.4);
+  display:flex; align-items:center; justify-content:center; z-index: 50;
+}
+.modal-body{
+  width:100%; max-width: 560px; background:#fff; border-radius:16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  padding: 20px;
+}
+.modal-title{ font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.modal-form{ display: grid; gap: 10px; }
+.frow{ display:flex; align-items: center; gap:10px; }
+.frow.fcheck{ align-items:center; }
+.flabel{ width: 84px; font-size:12px; color:#6b7280; }
+.fgroup{ display:flex; align-items:center; gap:8px; }
+.iselect{ border:1px solid #d1d5db; border-radius:8px; padding:6px 8px; }
+.modal-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px; }

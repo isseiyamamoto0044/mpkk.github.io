@@ -1,0 +1,237 @@
+/* スコープ用ルート */
+.tasks-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 見出し */
+.tasks-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 作成フォームのグリッド */
+.tasks-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px 12px;
+  align-items: center;
+}
+
+.tasks-label {
+  color: #374151; /* gray-700 */
+  font-size: 13px;
+}
+
+.tasks-select {
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.tasks-select.small {
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.tasks-checkbox-row {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.tasks-checkbox {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* 一覧 */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+}
+
+.task-item.pinned {
+  border-color: #f59e0b; /* amber-500 */
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15);
+}
+
+.task-item.todo { /* 追加で色分けしたいとき用 */
+  /* outline-leftなどの装飾は必要に応じて */
+}
+
+.task-item.doing { }
+
+.task-item.done {
+  opacity: 0.9;
+}
+
+.task-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+
+.task-title {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.task-actions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.task-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.task-desc {
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.task-meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: #6b7280; /* gray-500 */
+}
+
+.task-due {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #f3f4f6; /* gray-100 */
+}
+
+.task-pin {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #fff7ed; /* amber-50 */
+  color: #b45309;      /* amber-700 */
+}
+
+/* ヘルパー */
+.tasks-muted { color: #6b7280; font-size: 13px; }
+.tasks-error { color: #b91c1c; }
+
+/* レスポンシブ */
+@media (max-width: 720px) {
+  .tasks-grid {
+    grid-template-columns: 1fr;
+  }
+  .tasks-checkbox-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .task-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .task-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* ===== 2ペインレイアウト ===== */
+.tasks-two-pane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.pane .pane-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.task-list { list-style: none; padding: 0; margin: 0; }
+
+/* ===== 行スタイル ===== */
+.task-row {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  position: relative;
+  cursor: grab;
+}
+.task-row:active { cursor: grabbing; }
+.task-row.done { opacity: .7; }
+.task-label { display: inline-flex; gap: 8px; align-items: center; }
+.task-detail { margin: 6px 0 0 24px; color: #6b7280; font-size: 14px; }
+.task-meta { display: flex; gap: 6px; align-items: center; position: absolute; right: 12px; top: 8px; }
+.tag { font-size: 12px; background: #f1f5f9; padding: 2px 6px; border-radius: 9999px; }
+.empty { color: #6b7280; text-align: center; padding: 12px 0; }
+
+/* ===== DnD 視覚効果 ===== */
+.task-row.is-dragging {
+  opacity: .6;
+  outline: 2px dashed #a5b4fc;
+}
+
+/* ===== モーダル（中央配置） ===== */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.38);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100; padding: 16px;
+}
+.modal {
+  width: 100%; max-width: 560px;
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.25);
+  display: flex; flex-direction: column;
+  max-height: 85vh;
+}
+.modal__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid #e5e7eb;
+}
+.modal__title { font-weight: 600; }
+.modal__close { font-size: 20px; line-height: 1; border: none; background: transparent; cursor: pointer; }
+.modal__body { padding: 16px; overflow: auto; }
+.modal__footer { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7eb; }
+.label { font-size: 12px; color: #6b7280; display: block; margin-bottom: 6px; }
+
+/* ===== タグ選択 ===== */
+.tag-multi { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-multi__opt { cursor: pointer; }
+.tag-multi__opt.is-checked .tag-chip { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+.tag-chip {
+  display: inline-block; padding: 4px 10px; font-size: 12px;
+  border: 1px solid #e5e7eb; border-radius: 9999px;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 960px){
+  .tasks-two-pane { grid-template-columns: 1fr; }
+}

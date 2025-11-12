@@ -1,0 +1,147 @@
+/* ===== ReceptionOpsHandovers.css ===== */
+/* ダッシュボード側と同じ見た目に揃える。スコープは .ops-handovers 配下に限定。 */
+
+:root {
+  --ops-border: #e5e7eb;
+  --ops-muted: #6b7280;
+  --ops-bg: #ffffff;
+}
+
+.ops-handovers .ops-scroll { max-height: 16rem; overflow: auto; }
+
+/* --- カード（旧 .handover-row 相当） --- */
+.ops-handovers .handover-card {
+  display: block;
+  padding: 12px;
+  background: var(--ops-bg);
+  border: 1px solid var(--ops-border);
+  border-radius: 12px;
+}
+
+/* アイテム間余白 */
+.ops-handovers .handover-card + .handover-card { margin-top: 12px; }
+
+/* --- 1行目：ピン + 題目 + 期間 --- */
+.ops-handovers .handover-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0; /* 省略記号が効くように */
+}
+
+.ops-handovers .handover-pin {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ops-handovers .handover-title {
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* タイトルは可変幅 */
+  flex: 1 1 auto;
+}
+
+.ops-handovers .handover-period {
+  color: var(--ops-muted);
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* --- 2行目：タグ + 操作群 --- */
+.ops-handovers .handover-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+.ops-handovers .handover-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* --- 3行目：補足 --- */
+.ops-handovers .handover-note {
+  font-size: 12px;
+  color: var(--ops-muted);
+  margin-top: 6px;
+  padding-left: 30px; /* ピン＋タイトル分の下げ */
+}
+
+/* モーダル横幅（ダッシュボードと統一） */
+.ops-handovers .max-width-modal { max-width: 520px; }
+
+/* ===== シンプルなモーダル ===== */
+.ops-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.ops-modal {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  padding: 16px;
+}
+
+.ops-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 4px 0 12px;
+}
+
+.ops-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ops-field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ops-field-label {
+  font-size: 12px;
+  color: #6b7280;
+  width: 56px;
+  flex: 0 0 auto;
+}
+
+.ops-select {
+  flex: 1 1 auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #fff;
+}
+
+.ops-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ops-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}

@@ -1,0 +1,240 @@
+/* ====== モーダル ====== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background: #fff;
+  width: 420px;
+  max-width: 92vw;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+
+.modal-body { margin-bottom: .75rem; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ====== タグ一覧（ヘッダーなしの3カラム） ====== */
+.tag-table {
+  width: 100%;
+  border-top: 1px solid #e5e7eb;
+}
+
+.tag-table.no-header { /* marker only */ }
+
+.tag-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto; /* [タグ名] [カテゴリ] [操作] */
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.92rem;
+}
+
+.tag-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-type {
+  color: #4b5563;  /* gray-600 */
+  font-size: 0.88rem;
+}
+
+.tag-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ====== 2カラムレイアウト（モバイルでは縦積み） ====== */
+.settings-two-col {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 1024px) {
+  .settings-two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ====== モーダル ====== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.modal {
+  background: #fff;
+  width: 420px;
+  max-width: 92vw;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.modal-body { margin-bottom: .75rem; }
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ====== 共通テーブル風（ヘッダー無し） ====== */
+/* テーブル風の整列 */
+.tag-table {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 名前 / 役職 / 最終出勤日 / 操作 */
+.tag-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tag-col {
+  padding: 0 8px;
+  font-size: 0.9rem;
+}
+
+.tag-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end; /* 右端に寄せる */
+}
+
+.tag-type {
+  color: #4b5563; /* gray-600 */
+  font-size: 0.88rem;
+}
+.tag-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ====== ステータスPill（出勤/不在） ====== */
+.status-pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+  background: #fff;
+}
+.status-pill.on {
+  background: #10b98122; /* green-500 alpha */
+  border-color: #10b981;
+  color: #065f46;
+}
+.status-pill.off {
+  background: #ef444422; /* red-500 alpha */
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+/* ==== Member 行（表レイアウト） ==== */
+.ops-shift-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) auto auto 1fr; /* 名前 | タグ | 時間 | 右余白 */
+  align-items: center;
+  gap: 16px;          /* 1マスの空き */
+  padding: 12px 16px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+}
+
+/* 右端の退勤ボタンは列の一番右に寄せる */
+.ops-shift-actions {
+  justify-self: end;
+}
+
+/* タグと時間のトーン */
+.ops-role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+.ops-shift-time {
+  font-size: 12px;
+  color: #6b7280; /* text-gray-500 */
+}
+
+/* ==== モーダル（ポップアップ） ==== */
+.ops-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* 確実に最前面 */
+}
+
+.ops-modal {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  padding: 20px;
+}
+
+.ops-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ops-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}

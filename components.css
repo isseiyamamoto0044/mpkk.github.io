@@ -1,0 +1,131 @@
+/* ===== Header 共通スタイル ===== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: #4f46e5; /* indigo-600 */
+}
+
+.header-text {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.header-nav::-webkit-scrollbar {
+  display: none; /* 横スクロールバー隠す */
+}
+.header-nav {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* nav 内の Button カスタム */
+.header-nav .active {
+  background-color: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+/* 共通のカードデザイン */
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+/* タイトル部分 */
+.card-header span {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.1rem;       /* 少し大きめ */
+  font-weight: 600;        /* セミボールド */
+  color: #1f2937;          /* gray-800 */
+  letter-spacing: 0.02em;  /* 微調整 */
+}
+
+.card-content {
+  font-size: 0.9rem;
+  color: #374151; /* gray-700 */
+  line-height: 1.5;
+}
+
+/* src/components/Tags.css */
+.tag-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.875rem;   /* text-sm 相当 */
+  font-weight: 500;
+  color: #fff;           /* 常に白文字 */
+  white-space: nowrap;
+}
+
+/* src/components/ChecklistCard.css */
+.cl-card { padding: 14px; }
+.cl-header {
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;
+}
+.cl-title { font-weight:600; font-size:16px; }
+.cl-sub { color:#6b7280; margin-left:6px; font-weight:500; }
+.cl-actions > * + * { margin-left:6px; }
+.cl-progress { font-size:12px; color:#6b7280; margin-bottom:8px; }
+.cl-list { list-style:none; padding:0; margin:0; }
+.cl-row { display:flex; align-items:center; justify-content:space-between;
+  border:1px solid #e5e7eb; background:#fff; padding:10px 12px; border-radius:10px; margin-bottom:8px;
+}
+.cl-row.is-done .cl-text { text-decoration:line-through; color:#9ca3af; }
+.cl-check { display:flex; align-items:center; gap:8px; }
+.cl-meta { display:flex; align-items:center; gap:6px; }
+.cl-chip { font-size:12px; background:#eef2ff; color:#4338ca; padding:2px 6px; border-radius:9999px; }
+.cl-empty { color:#6b7280; padding:16px 0; text-align:center; }
